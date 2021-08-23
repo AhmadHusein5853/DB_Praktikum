@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+	<display-name>Babble</display-name>
+
+	<servlet>
+		<servlet-name>freemarker</servlet-name>
+		<servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+
+		<!-- FreemarkerServlet settings: -->
+		<init-param>
+			<param-name>TemplatePath</param-name>
+			<param-value>WEB-INF</param-value>
+		</init-param>
+		<init-param>
+			<param-name>NoCache</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ContentType</param-name>
+			<param-value>text/html; charset=UTF-8</param-value>
+		</init-param>
+
+		<!-- FreeMarker settings: -->
+		<init-param>
+			<param-name>template_update_delay</param-name>
+			<param-value>0</param-value>
+			<!-- 0 is for development only! Use higher value otherwise. -->
+		</init-param>
+		<init-param>
+			<param-name>default_encoding</param-name>
+			<param-value>UTF-8</param-value>
+			<!-- The encoding of the template files. -->
+		</init-param>
+		<init-param>
+			<param-name>number_format</param-name>
+			<param-value>0.##########</param-value>
+		</init-param>
+
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>freemarker</servlet-name>
+		<url-pattern>*.ftl</url-pattern>
+	</servlet-mapping>
+	<!-- we should change this  -->
+	<servlet>
+		<servlet-name>view_main_Servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.ViewMainServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>view_main_Servlet</servlet-name>
+		<url-pattern>/view_main</url-pattern>
+	</servlet-mapping>
+
+<!--	other mapping to reach the page	 -->
+	<servlet-mapping>
+		<servlet-name>view_main_Servlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- we should change this  -->
+
+	<servlet>
+		<servlet-name>view_available_course_Servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.ViewCourseServlet</servlet-class>
+	</servlet>
+	<!-- we should change this  -->
+	<servlet-mapping>
+		<servlet-name>view_available_course_Servlet</servlet-name>
+		<url-pattern>/view_available_course</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>view_available_course_Servlet</servlet-name>
+		<url-pattern>/view_my_course</url-pattern>
+	</servlet-mapping>
+	<!-- we should change this  -->
+	<servlet>
+		<servlet-name>new_course_Servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewCourseServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>new_course_Servlet</servlet-name>
+		<url-pattern>/new_course</url-pattern>
+	</servlet-mapping>
+	<!-- we should change this  -->
+	<servlet>
+		<servlet-name>new_enroll_Servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewEnrollServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>new_enroll_Servlet</servlet-name>
+		<url-pattern>/new_enroll</url-pattern>
+	</servlet-mapping>
+	<!-- we should change this  -->
+	<servlet>
+		<servlet-name>new_Assignment_Servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewAssignmentServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>new_Assignment_Servlet</servlet-name>
+		<url-pattern>/new_assignment</url-pattern>
+	</servlet-mapping>
+	<!-- we should change this  -->
+	<servlet>
+		<servlet-name>new_Assess_Servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewAssessServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>new_Assess_Servlet</servlet-name>
+		<url-pattern>/new_assess</url-pattern>
+	</servlet-mapping>
+	<!-- we should change this  -->
+
+
+
+
+
+
+
+
+	<!-- Prevent the visiting of MVC Views from outside the servlet container. 
+		RequestDispatcher.forward/include should and will still work. Removing this 
+		may open security holes! -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>FreeMarker MVC Views</web-resource-name>
+			<url-pattern>*.ftl</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<!-- Nobody is allowed to visit these -->
+		</auth-constraint>
+	</security-constraint>
+
+</web-app>
